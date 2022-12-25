@@ -188,6 +188,7 @@ public class WineController {
     }
 
     @PostMapping("{wineId}/images")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> uploadImage(@PathVariable Long wineId,
                                               @RequestParam("image") MultipartFile multipartImage) {
         imageService.create(wineId, multipartImage);
