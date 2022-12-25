@@ -45,7 +45,6 @@ public class Wine extends Product {
     private Set<Image> images = new HashSet<>();
     private String description;
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {

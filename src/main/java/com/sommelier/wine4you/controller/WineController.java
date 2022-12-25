@@ -51,7 +51,8 @@ public class WineController {
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<WineResponseDto> create(WineRequestDto wineRequestDto) {
-        return new ResponseEntity<>(wineMapper.toDto(wineService.create(wineMapper.toModel(wineRequestDto))), HttpStatus.CREATED);
+        return new ResponseEntity<>(wineMapper.toDto(
+                wineService.create(wineMapper.toModel(wineRequestDto))), HttpStatus.CREATED);
     }
 
     @ApiOperation(value = "Get All Wines REST API")
@@ -84,9 +85,11 @@ public class WineController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
-    public ResponseEntity<WineResponseDto> update(@PathVariable("id") Long id,
-                                                  @Valid @RequestBody WineRequestDto wineRequestDto) {
-        return ResponseEntity.ok(wineMapper.toDto(wineService.update(id, wineMapper.toModel(wineRequestDto))));
+    public ResponseEntity<WineResponseDto> update(
+            @PathVariable("id") Long id,
+            @Valid @RequestBody WineRequestDto wineRequestDto) {
+        return ResponseEntity.ok(wineMapper.toDto(
+                wineService.update(id, wineMapper.toModel(wineRequestDto))));
     }
 
     @ApiOperation(value = "Delete Wine by 'Id' REST API")
@@ -187,7 +190,8 @@ public class WineController {
     @PostMapping("{wineId}/images")
     public ResponseEntity<?> uploadImage(@PathVariable Long wineId,
                                          @RequestParam("image") MultipartFile multipartImage) {
-        return new ResponseEntity<>(imageService.create(wineId, multipartImage), HttpStatus.CREATED);
+        return new ResponseEntity<>(imageService
+                .create(wineId, multipartImage), HttpStatus.CREATED);
     }
 
     @GetMapping(value = "{wineId}/images/{imageId}", produces = MediaType.IMAGE_JPEG_VALUE)

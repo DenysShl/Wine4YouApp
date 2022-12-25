@@ -31,12 +31,18 @@ public class WineTaste {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         WineTaste wineTaste = (WineTaste) o;
 
-        if (!Objects.equals(id, wineTaste.id)) return false;
+        if (!Objects.equals(id, wineTaste.id)) {
+            return false;
+        }
         return Objects.equals(nameTaste, wineTaste.nameTaste);
     }
 

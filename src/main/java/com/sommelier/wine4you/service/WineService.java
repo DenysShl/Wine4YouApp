@@ -2,10 +2,9 @@ package com.sommelier.wine4you.service;
 
 import com.sommelier.wine4you.model.Wine;
 import com.sommelier.wine4you.model.WineResponse;
-import org.springframework.stereotype.Service;
-
 import java.math.BigDecimal;
 import java.util.List;
+import org.springframework.stereotype.Service;
 
 @Service
 public interface WineService {

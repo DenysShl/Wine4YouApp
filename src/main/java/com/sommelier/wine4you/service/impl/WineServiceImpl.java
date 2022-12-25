@@ -1,8 +1,11 @@
 package com.sommelier.wine4you.service.impl;
 
 import com.sommelier.wine4you.exception.ResourceNotFoundException;
-import com.sommelier.wine4you.model.*;
-import com.sommelier.wine4you.model.dto.WineRequestDto;
+import com.sommelier.wine4you.model.Event;
+import com.sommelier.wine4you.model.Wine;
+import com.sommelier.wine4you.model.WineResponse;
+import com.sommelier.wine4you.model.WineStyle;
+import com.sommelier.wine4you.model.WineTaste;
 import com.sommelier.wine4you.model.dto.WineResponseDto;
 import com.sommelier.wine4you.model.enums.WineType;
 import com.sommelier.wine4you.model.mapper.impl.WineMapperImpl;
@@ -11,6 +14,9 @@ import com.sommelier.wine4you.repository.WineRepository;
 import com.sommelier.wine4you.repository.WineStyleRepository;
 import com.sommelier.wine4you.repository.WineTasteRepository;
 import com.sommelier.wine4you.service.WineService;
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,10 +24,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Log4j2
 @Service
@@ -114,7 +116,9 @@ public class WineServiceImpl implements WineService {
     @Override
     public List<Wine> getWinesByPriceBetween(BigDecimal priceMin, BigDecimal priceMax) {
         return wineRepository.findByPriceBetween(priceMin, priceMax).orElseThrow(
-                () -> new ResourceNotFoundException("Wine", "Price", "range(" + priceMin + ", " + priceMax)
+                () -> new ResourceNotFoundException(
+                        "Wine", "Price", "range(" + priceMin + ", " + priceMax
+                )
         );
     }
 

@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -32,12 +31,18 @@ public class WineStyle {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         WineStyle wineStyle = (WineStyle) o;
 
-        if (!Objects.equals(id, wineStyle.id)) return false;
+        if (!Objects.equals(id, wineStyle.id)) {
+            return false;
+        }
         return Objects.equals(nameStyle, wineStyle.nameStyle);
     }
 

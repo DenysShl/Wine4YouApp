@@ -1,11 +1,10 @@
 package com.sommelier.wine4you.model;
 
 import com.sommelier.wine4you.model.dto.WineResponseDto;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Data
 @AllArgsConstructor
