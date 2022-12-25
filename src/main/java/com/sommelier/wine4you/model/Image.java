@@ -11,9 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,7 +31,7 @@ public class Image {
 
     @Lob
     @Column(name = "image")
-    byte[] content;
+    private byte[] content;
     @ManyToOne(targetEntity = Wine.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "wine_id", nullable = false)
     private Wine wine;
@@ -70,14 +67,14 @@ public class Image {
         result = 31 * result + (wine != null ? wine.hashCode() : 0);
         return result;
     }
-//
-//    @Override
-//    public String toString() {
-//        return "WineImage{"
-//                + "id=" + id
-//                + ", name='" + name + '\''
-//                + ", content=" + Arrays.toString(content)
-//                + ", wine=" + wine
-//                + '}';
-//    }
+
+    @Override
+    public String toString() {
+        return "WineImage{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", content=" + Arrays.toString(content)
+                + ", wine=" + wine
+                + '}';
+    }
 }

@@ -1,12 +1,11 @@
 package com.sommelier.wine4you.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sommelier.wine4you.utils.Email;
+import com.sommelier.wine4you.utils.Phone;
 import java.time.LocalDate;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.sommelier.wine4you.utils.Phone;
 import lombok.Data;
 
 @Data

@@ -5,8 +5,12 @@ import java.util.List;
 
 public interface WineTasteService {
     WineTaste create(WineTaste wineTaste);
+
     WineTaste findById(Long id);
+
     List<WineTaste> getAll();
+
     void deleteById(Long id);
+
     WineTaste findByTasteName(String name);
 }
