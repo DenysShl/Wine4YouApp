@@ -188,14 +188,16 @@ public class WineController {
     }
 
     @PostMapping("{wineId}/images")
-    public ResponseEntity<?> uploadImage(@PathVariable Long wineId,
-                                         @RequestParam("image") MultipartFile multipartImage) {
-        return new ResponseEntity<>(imageService
-                .create(wineId, multipartImage), HttpStatus.CREATED);
+    public ResponseEntity<String> uploadImage(@PathVariable Long wineId,
+                                              @RequestParam("image") MultipartFile multipartImage) {
+        imageService.create(wineId, multipartImage);
+        return ResponseEntity.ok("Image uploaded successfully: "
+                + multipartImage.getOriginalFilename());
     }
 
     @GetMapping(value = "{wineId}/images/{imageId}", produces = MediaType.IMAGE_JPEG_VALUE)
-    public ResponseEntity<?> downloadImage(@PathVariable Long wineId, @PathVariable Long imageId) {
-        return ResponseEntity.ok(new ByteArrayResource(imageService.getById(wineId, imageId)));
+    public byte[] downloadImage(@PathVariable Long wineId,
+                                @PathVariable Long imageId) {
+        return new ByteArrayResource(imageService.getById(wineId, imageId)).getByteArray();
     }
 }
