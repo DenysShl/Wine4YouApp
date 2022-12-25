@@ -103,13 +103,13 @@ public class WineServiceImpl implements WineService {
 
     @Override
     public List<Wine> getAllByBrand(String brand) {
-        return wineRepository.findByBrand(brand).orElseThrow(
+        return wineRepository.findByBrand(brand.toUpperCase()).orElseThrow(
                 () -> new ResourceNotFoundException("Wine", "Brand", brand));
     }
 
     @Override
     public List<Wine> getAllByName(String name) {
-        return wineRepository.findByName(name).orElseThrow(
+        return wineRepository.findByName(name.toUpperCase()).orElseThrow(
                 () -> new ResourceNotFoundException("Wine", "Name", name));
     }
 
@@ -124,14 +124,14 @@ public class WineServiceImpl implements WineService {
 
     @Override
     public List<Wine> getByCountry(String country) {
-        return wineRepository.findByCountry(country).orElseThrow(
+        return wineRepository.findByCountry(country.toUpperCase()).orElseThrow(
                 () -> new ResourceNotFoundException("Wine", "Country", country)
         );
     }
 
     @Override
     public List<Wine> getByEvent(String event) {
-        Event findEvent = eventRepository.findByNameEvent(event).orElseThrow(
+        Event findEvent = eventRepository.findByNameEvent(event.toUpperCase()).orElseThrow(
                 () -> new ResourceNotFoundException("Event", "EventName", event)
         );
         return wineRepository.findByEvent(findEvent).orElseThrow(
@@ -140,7 +140,7 @@ public class WineServiceImpl implements WineService {
 
     @Override
     public List<Wine> getByWineStyle(String style) {
-        WineStyle wineStyle = styleRepository.findByNameStyle(style).orElseThrow(
+        WineStyle wineStyle = styleRepository.findByNameStyle(style.toUpperCase()).orElseThrow(
                 () -> new ResourceNotFoundException("Wine", "Style", style)
         );
         return wineRepository.findByWineStyle(wineStyle).orElseThrow(
@@ -157,7 +157,7 @@ public class WineServiceImpl implements WineService {
 
     @Override
     public List<Wine> getByWineTaste(String taste) {
-        WineTaste wineTaste = tasteRepository.findByNameTaste(taste).orElseThrow(
+        WineTaste wineTaste = tasteRepository.findByNameTaste(taste.toUpperCase()).orElseThrow(
                 () -> new ResourceNotFoundException("Wine", "Taste", taste)
         );
         return wineRepository.findByWineTaste(wineTaste).orElseThrow(
