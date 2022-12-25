@@ -277,7 +277,7 @@ public class DataInitializer {
                 getEvent("Corporate event")));
     }
 
-    private Event getEvent(String name){
+    private Event getEvent(String name) {
         Event event = new Event();
         event.setNameEvent(name.toUpperCase());
         return event;
@@ -300,7 +300,7 @@ public class DataInitializer {
         ));
     }
 
-    private WineStyle getStyle(String name){
+    private WineStyle getStyle(String name) {
         WineStyle style = new WineStyle();
         style.setNameStyle(name.toUpperCase());
         return style;
@@ -363,7 +363,7 @@ public class DataInitializer {
         ));
     }
 
-    private WineTaste getTaste(String name){
+    private WineTaste getTaste(String name) {
         WineTaste taste = new WineTaste();
         taste.setNameTaste(name.toUpperCase());
         return taste;
