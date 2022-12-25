@@ -181,7 +181,7 @@ public class WineController {
     public ResponseEntity<List<WineResponseDto>> getAllWinesByStyle(
             @RequestParam(value = "style") String style) {
         List<WineResponseDto> wineResponseDtos
-                = wineService.getByWineTaste(style).stream()
+                = wineService.getByWineStyle(style).stream()
                 .map(wine -> wineMapper.toDto(wine))
                 .collect(Collectors.toList());
         return ResponseEntity.ok(wineResponseDtos);
