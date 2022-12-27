@@ -76,13 +76,14 @@ public class DataInitializer {
                                 true,
                                 "Cabernet Sauvignon",
                                 WineType.RED,
-                                styleRepository.findByNameStyle("Elegant").get(), //
-                                tasteRepository.findByNameTaste("Cherry").get(),
-                                eventRepository.findByNameEvent("Birthday").get(),
+                                styleRepository.findByNameStyle("Elegant").get(),
+                                tasteRepository.findByNameTaste("Dried Cherry").get(),
+                                eventRepository.findByNameEvent("Party").get(),
                                 0.75,
-                                "jJames Suckling-Mendoza, Argentina - "
-                                        + "\"Savory sweet tobacco, blackcurrants and some thyme"
-                                        + " tightly before a long, savory finish.\""),
+                                "Savory sweet tobacco, blackcurrants and some thyme and white"
+                                + " pepper on the nose. The chunk of powdery tannins really grabs"
+                                + " your palate, wrapping the fruit tightly before"
+                                + " a long, savory finish."),
                         getWine("Pietramerana",
                                 "Italy",
                                 "Pietramerana Sangiovese Toscana IGT, 2019",
@@ -90,13 +91,14 @@ public class DataInitializer {
                                 true,
                                 "Sangiovese Toscana IGT",
                                 WineType.RED,
-                                styleRepository.findByNameStyle("Elegant").get(), //
+                                styleRepository.findByNameStyle("Concentrated").get(),
                                 tasteRepository.findByNameTaste("Cherry").get(),
                                 eventRepository.findByNameEvent("Birthday").get(),
                                 0.75,
-                                "James Suckling-Italy - Tuscany - Toscana -"
-                                        + " too. Medium-bodied with fine, firm tannins. Fragrant"
-                                        + " and spicy finish. \""),
+                                "This has aromas of raspberries, redcurrants, lavender"
+                                        + " and dried herbs. Some cinnamon and anise, too."
+                                        + " Medium-bodied with fine, firm tannins."
+                                        + " Fragrant and spicy finish."),
                         getWine("URO",
                                 "Spain",
                                 "Uro Toro La Enfermera Tempranillo, 2020",
@@ -105,12 +107,14 @@ public class DataInitializer {
                                 "Toro La Enfermera Tempranillo",
                                 WineType.RED,
                                 styleRepository.findByNameStyle("Elegant").get(), //
-                                tasteRepository.findByNameTaste("Cherry").get(),
-                                eventRepository.findByNameEvent("Birthday").get(),
+                                tasteRepository.findByNameTaste("Black Fruit").get(),
+                                eventRepository.findByNameEvent("New year").get(),
                                 0.75,
-                                "James Suckling-Toro, Spain - \"Aromas of smoke,"
-                                        + " It's a bigger wine, but the tannins show focus and"
-                                        + " softness. 100% tinta de toro.\""),
+                                "Aromas of smoke, berry and cracked pepper. Medium"
+                                        + " to full body, round and juicy tannins and"
+                                        + " a delicious, fruity finish. It's a bigger wine,"
+                                        + " but the tannins show focus and softness."
+                                        + " 100% tinta de toro."),
                         getWine("Meleto",
                                 "Italy",
                                 "Castello Meleto Borgaio Rosso di Toscana, 2019",
@@ -118,13 +122,14 @@ public class DataInitializer {
                                 false,
                                 "Borgaio Rosso di Toscana",
                                 WineType.RED,
-                                styleRepository.findByNameStyle("Elegant").get(), //
-                                tasteRepository.findByNameTaste("Cherry").get(),
+                                styleRepository.findByNameStyle("Elegant").get(),
+                                tasteRepository.findByNameTaste("Red Berry").get(),
                                 eventRepository.findByNameEvent("Birthday").get(),
                                 0.75,
-                                "James Suckling-Toscana IGT, Tuscany, Italy -"
-                                        + " \"A fruity red with plenty of dried-berry, walnut"
-                                        + " courses and grilled red meats and cheeses."),
+                                "A fruity red with plenty of dried-berry, walnut and"
+                                        + " wet-earth character. Medium body, ripe tannins"
+                                        + " and a flavorful finish. Perfect to accompany"
+                                        + " first courses and grilled red meats and cheeses."),
                         getWine("Altaland",
                                 "Argentina",
                                 "Altaland Malbec Mendoza, 2020",
@@ -132,13 +137,14 @@ public class DataInitializer {
                                 true,
                                 "Malbec Mendoza",
                                 WineType.RED,
-                                styleRepository.findByNameStyle("Elegant").get(), //
-                                tasteRepository.findByNameTaste("Cherry").get(),
-                                eventRepository.findByNameEvent("Birthday").get(),
+                                styleRepository.findByNameStyle("Elegant").get(),
+                                tasteRepository.findByNameTaste("Dark Berry").get(),
+                                eventRepository.findByNameEvent("Corporate event").get(),
                                 0.75,
-                                "James Suckling-Italy - Tuscany - Toscana -"
-                                        + " too. Medium-bodied with fine, firm tannins. Fragrant"
-                                        + " and spicy finish. \""),
+                                "A tight, polished malbec that is a blend from"
+                                        + " various high-altitude wines. It's a medium"
+                                        + " bodied with firm tannins. Sophisticated and"
+                                        + " very refined. Drink now."),
                         getWine("Marchese dell'Elsa",
                                 "Italy",
                                 "Marchese dell'Elsa Moscato d'Asti",
@@ -146,12 +152,13 @@ public class DataInitializer {
                                 true,
                                 "Moscato d'Asti",
                                 WineType.CHAMPAGNE_SPARKLING,
-                                styleRepository.findByNameStyle("Elegant").get(), //
-                                tasteRepository.findByNameTaste("Cherry").get(),
-                                eventRepository.findByNameEvent("Birthday").get(),
+                                styleRepository.findByNameStyle("Sweet").get(),
+                                tasteRepository.findByNameTaste("Peach").get(),
+                                eventRepository.findByNameEvent("New year").get(),
                                 0.75,
-                                "Asti, Piedmont, Italy - A fruit-driven people pleaser."
-                                + " to pair with a fruit plate. Or sip on the porch after dinner."),
+                                "A fruit-driven people pleaser. Hints of peach blossoms"
+                                        + " and fresh citrus make it a natural to pair with a"
+                                        + " fruit plate. Or sip on the porch after dinner."),
                         getWine("Louis Bouillot",
                                 "France",
                                 "Louis Bouillot Perle de Vigne Brut",
@@ -159,13 +166,15 @@ public class DataInitializer {
                                 true,
                                 "Perle de Vigne",
                                 WineType.CHAMPAGNE_SPARKLING,
-                                styleRepository.findByNameStyle("Elegant").get(), //
-                                tasteRepository.findByNameTaste("Cherry").get(),
-                                eventRepository.findByNameEvent("Birthday").get(),
+                                styleRepository.findByNameStyle("Elegant").get(),
+                                tasteRepository.findByNameTaste("Apple").get(),
+                                eventRepository.findByNameEvent("Party").get(),
                                 0.375,
-                                "Wine & Spirits-Burgundy, France - This is a blend"
-                                + " focused and clean. The bubbles are ready to take on any"
-                                + " raw shellfish."),
+                                "This is a blend of Chardonnay, Pinot Noir, Aligote and Gamay,"
+                                        + " aged 12 months on lees in bottle. It's fragrant with"
+                                        + " notes of toasty lees and chalk, a simple sparkler that"
+                                        + " feels focused and clean. The bubbles are ready"
+                                        + " to take on any raw shellfish."),
                         getWine("Cruse",
                                 "France",
                                 "Cruse Brut",
@@ -173,12 +182,14 @@ public class DataInitializer {
                                 true,
                                 "Brut",
                                 WineType.CHAMPAGNE_SPARKLING,
-                                styleRepository.findByNameStyle("Elegant").get(), //
-                                tasteRepository.findByNameTaste("Cherry").get(),
-                                eventRepository.findByNameEvent("Birthday").get(),
+                                styleRepository.findByNameStyle("Dry").get(), //
+                                tasteRepository.findByNameTaste("Apple").get(),
+                                eventRepository.findByNameEvent("Corporate event").get(),
                                 0.75,
-                                "Asti, Piedmont, Italy - A fruit-driven people pleaser."
-                                + " to pair with a fruit plate. Or sip on the porch after dinner."),
+                                "An easy-drinking sparkling wine that has nice pear notes."
+                                        + " All the acidity and smooth texture serves to brighten"
+                                        + " it. Easy and light, the bubbles are nice and peppy,"
+                                        + " giving this wine energy."),
                         getWine("Albino Armani",
                                 "Italy",
                                 "Armani Prosecco",
@@ -187,11 +198,13 @@ public class DataInitializer {
                                 "Prosecco",
                                 WineType.CHAMPAGNE_SPARKLING,
                                 styleRepository.findByNameStyle("Elegant").get(), //
-                                tasteRepository.findByNameTaste("Cherry").get(),
-                                eventRepository.findByNameEvent("Birthday").get(),
+                                tasteRepository.findByNameTaste("Apricot").get(),
+                                eventRepository.findByNameEvent("Party").get(),
                                 0.75,
-                                "Asti, Piedmont, Italy - A fruit-driven people pleaser."
-                                + " to pair with a fruit plate. Or sip on the porch after dinner."),
+                                "A plush and refreshing Prosecco with an expressive mix of apple"
+                                        + " blossom, and lemon zest. Ripe and bold fruit combine"
+                                        + " with savory acidity to give the wine balance, texture"
+                                        + " and depth."),
                         getWine("La Vostra",
                                 "Italy",
                                 "La Vostra Prosecco Rose",
@@ -199,12 +212,13 @@ public class DataInitializer {
                                 true,
                                 "Prosecco Rose",
                                 WineType.CHAMPAGNE_SPARKLING,
-                                styleRepository.findByNameStyle("Elegant").get(), //
-                                tasteRepository.findByNameTaste("Cherry").get(),
-                                eventRepository.findByNameEvent("Party").get(),
+                                styleRepository.findByNameStyle("Fresh").get(), //
+                                tasteRepository.findByNameTaste("Strawberry").get(),
+                                eventRepository.findByNameEvent("Corporate event").get(),
                                 0.75,
-                                "Beverage Dynamics-Italy - \"Slight cherry"
-                                        + " zesty character give this wine structure and fun.\"")
+                                "Slight cherry and strawberry notes on the nose and palate drive"
+                                        + " this plush sparkler. Sweet, ripe peach flavor and a"
+                                        + " zesty character give this wine structure and fun.")
 
                 )
         );
@@ -359,7 +373,14 @@ public class DataInitializer {
                 getTaste("Cinnamon"),
                 getTaste("Pepper"),
                 getTaste("Mulberry"),
-                getTaste("Tobacco")
+                getTaste("Tobacco"),
+                getTaste("Cream"),
+                getTaste("Lemon"),
+                getTaste("Anise"),
+                getTaste("White Flower"),
+                getTaste("Pineapple"),
+                getTaste("Biscuit"),
+                getTaste("Golden Apple")
         ));
     }
 
