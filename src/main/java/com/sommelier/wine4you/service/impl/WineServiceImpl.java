@@ -65,15 +65,6 @@ public class WineServiceImpl implements WineService {
     }
 
     @Override
-    public void deleteById(Long id) {
-        Wine wine = wineRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Wine", "id", String.valueOf(id))
-        );
-        wineRepository.delete(wine);
-        log.info("Successfully, delete wine by id {}", id);
-    }
-
-    @Override
     public WineResponse getAll(int pageNo, int pageSize, String sortBy, String sortDir) {
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name())
                 ? Sort.by(sortBy).ascending()
@@ -88,6 +79,23 @@ public class WineServiceImpl implements WineService {
                 .collect(Collectors.toList());
 
         return getWineResponse(wines, content);
+    }
+
+    @Override
+    public List<WineResponseDto> getAll() {
+        return wineRepository.findAll()
+                .stream()
+                .map(wineMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        Wine wine = wineRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Wine", "id", String.valueOf(id))
+        );
+        wineRepository.delete(wine);
+        log.info("Successfully, delete wine by id {}", id);
     }
 
     private static WineResponse getWineResponse(Page<Wine> wines, List<WineResponseDto> content) {
