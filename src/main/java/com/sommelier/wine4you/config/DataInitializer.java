@@ -373,7 +373,14 @@ public class DataInitializer {
                 getTaste("Cinnamon"),
                 getTaste("Pepper"),
                 getTaste("Mulberry"),
-                getTaste("Tobacco")
+                getTaste("Tobacco"),
+                getTaste("Cream"),
+                getTaste("Lemon"),
+                getTaste("Anise"),
+                getTaste("White Flower"),
+                getTaste("Pineapple"),
+                getTaste("Biscuit"),
+                getTaste("Golden Apple")
         ));
     }
 
