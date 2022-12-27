@@ -2,6 +2,7 @@ package com.sommelier.wine4you.service;
 
 import com.sommelier.wine4you.model.Wine;
 import com.sommelier.wine4you.model.WineResponse;
+import com.sommelier.wine4you.model.dto.WineResponseDto;
 import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -12,11 +13,13 @@ public interface WineService {
 
     Wine getById(Long id);
 
+    List<WineResponseDto> getAll();
+
+    WineResponse getAll(int pageNo, int pageSize, String sortBy, String sortDir);
+
     Wine update(Long id, Wine wine);
 
     void deleteById(Long id);
-
-    WineResponse getAll(int pageNo, int pageSize, String sortBy, String sortDir);
 
     List<Wine> getAllByBrand(String brand);
 
