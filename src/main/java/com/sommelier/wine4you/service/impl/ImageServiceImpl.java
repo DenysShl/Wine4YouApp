@@ -8,6 +8,7 @@ import com.sommelier.wine4you.repository.ImageDbRepository;
 import com.sommelier.wine4you.repository.WineRepository;
 import com.sommelier.wine4you.service.ImageService;
 import java.io.IOException;
+import java.util.List;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,9 +35,11 @@ public class ImageServiceImpl implements ImageService {
             );
             Image dbImage = new Image();
             dbImage.setWine(wine);
-            dbImage.setName(multipartImage.getName());
+            dbImage.setName(multipartImage.getOriginalFilename());
             dbImage.setType(multipartImage.getContentType());
             dbImage.setContent(multipartImage.getBytes());
+            dbImage.setUrlPath("api/v1/wines/" + wineId
+                    + "/images/" + multipartImage.getOriginalFilename());
             return imageDbRepository.save(dbImage);
         } catch (IOException e) {
             throw new RuntimeException("Can`t save image to database", e);
@@ -58,7 +61,14 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public void deleteById(Long wineId, Long imageId) {
+    public Image getById(Long id) {
+        return imageDbRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Image", "id", String.valueOf(id))
+        );
+    }
+
+    @Override
+    public boolean deleteById(Long wineId, Long imageId) {
         Wine wine = wineRepository.findById(wineId).orElseThrow(
                 () -> new ResourceNotFoundException("Wine", "id", String.valueOf(wineId))
         );
@@ -70,5 +80,11 @@ public class ImageServiceImpl implements ImageService {
         }
         imageDbRepository.delete(image);
         log.info("Successfully, delete image for wine by id {}", imageId);
+        return imageDbRepository.existsById(imageId);
+    }
+
+    @Override
+    public List<Image> getAllByWineId(Long wineId) {
+        return imageDbRepository.findAllByWineId(wineId);
     }
 }

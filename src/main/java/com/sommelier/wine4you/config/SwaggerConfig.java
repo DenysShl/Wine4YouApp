@@ -30,9 +30,9 @@ public class SwaggerConfig {
                 "Spring Boot REST API Documentation for application 'Wine4You'",
                 "1",
                 "Terms of service",
-                new Contact("Denys.Shl", "https://www.linkedin.com/in/denys-shlemko/", "denys.shl@gmail.com"),
-                "License of API @2022",
-                "API license URL http://",
+                new Contact("Denys.Shl", "https://github.com/DenysShl/Wine4YouApp", "denys.shl@gmail.com"),
+                "License @2022",
+                "",
                 Collections.emptyList()
         );
     }

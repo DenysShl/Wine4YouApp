@@ -2,7 +2,7 @@ package com.sommelier.wine4you.security;
 
 import com.sommelier.wine4you.model.Role;
 import com.sommelier.wine4you.model.User;
-import com.sommelier.wine4you.repository.UserRepository;
+import com.sommelier.wine4you.service.UserService;
 import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -11,26 +11,20 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
-    private final UserRepository userRepository;
+    private final UserService userService;
 
     @Autowired
-    public CustomUserDetailsService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public CustomUserDetailsService(UserService userService) {
+        this.userService = userService;
     }
 
     @Override
-    public UserDetails loadUserByUsername(String userPhoneOrEmail)
-            throws UsernameNotFoundException {
-        User user = userRepository.findByPhoneOrEmail(userPhoneOrEmail, userPhoneOrEmail)
-                .orElseThrow(() ->
-                        new UsernameNotFoundException("User not found with username or email:"
-                                + userPhoneOrEmail)
-                );
+    public UserDetails loadUserByUsername(String userPhoneOrEmail) {
+        User user = userService.getByPhoneOrEmail(userPhoneOrEmail, userPhoneOrEmail);
         return new org.springframework.security.core.userdetails.User(
                 user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
     }

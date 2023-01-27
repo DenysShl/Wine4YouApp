@@ -59,11 +59,7 @@ public class DataInitializer {
 
     @PostConstruct
     public void injectData() {
-        createAdminUser();
-        createEvent();
-        createWineStyle();
-        createWineTaste();
-        createWine();
+        System.out.println("Start PostConstract");
     }
 
     private void createWine() {
@@ -401,8 +397,6 @@ public class DataInitializer {
         user.setPassword(passwordEncoder.encode(password));
         user.setBirthday(birthday);
         user.setPhone(phone);
-        user.setAddress(address);
-        user.setCity(city);
         user.setRoles(roles);
         user.setRegistrationDate(LocalDateTime.now());
         return user;

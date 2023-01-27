@@ -20,6 +20,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Setter
 @Getter
@@ -44,21 +45,20 @@ public class User {
     private LocalDate birthday;
     @Column(nullable = false)
     private String phone;
-    @Column(nullable = false)
-    private String address;
-    @Column(nullable = false)
-    private String city;
     @OneToOne(cascade = CascadeType.ALL)
-    private ShoppingCart shoppingCart;
+    private Address address;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Cart cart;
 
     @ManyToMany(fetch = FetchType.EAGER,
-            cascade = {CascadeType.MERGE, CascadeType.REMOVE})
+            cascade = {CascadeType.MERGE})
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Set<Role> roles;
     @Column(name = "registration_date")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss.SSS")
+    @CreationTimestamp
     private LocalDateTime registrationDate;
 
     @Override
@@ -96,10 +96,7 @@ public class User {
         if (!Objects.equals(address, user.address)) {
             return false;
         }
-        if (!Objects.equals(city, user.city)) {
-            return false;
-        }
-        if (!Objects.equals(shoppingCart, user.shoppingCart)) {
+        if (!Objects.equals(cart, user.cart)) {
             return false;
         }
         if (!Objects.equals(registrationDate, user.registrationDate)) {
@@ -118,8 +115,7 @@ public class User {
         result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
         result = 31 * result + (phone != null ? phone.hashCode() : 0);
         result = 31 * result + (address != null ? address.hashCode() : 0);
-        result = 31 * result + (city != null ? city.hashCode() : 0);
-        result = 31 * result + (shoppingCart != null ? shoppingCart.hashCode() : 0);
+        result = 31 * result + (cart != null ? cart.hashCode() : 0);
         result = 31 * result + (roles != null ? roles.hashCode() : 0);
         result = 31 * result + (registrationDate != null ? registrationDate.hashCode() : 0);
         return result;
@@ -132,12 +128,11 @@ public class User {
                 + ", firstName='" + firstName + '\''
                 + ", lastName='" + lastName + '\''
                 + ", email='" + email + '\''
-                + ", password='" + password + '\''
+                + ", password='" + " OK!" + '\''
                 + ", birthday=" + birthday
                 + ", phone='" + phone + '\''
                 + ", address='" + address + '\''
-                + ", city='" + city + '\''
-                + ", shoppingCart=" + shoppingCart
+                + ", shoppingCart=" + cart
                 + ", roles=" + roles
                 + ", registrationDate=" + registrationDate
                 + '}';

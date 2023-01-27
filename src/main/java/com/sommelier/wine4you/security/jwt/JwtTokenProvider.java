@@ -55,7 +55,7 @@ public class JwtTokenProvider {
         } catch (UnsupportedJwtException ex) {
             throw new WineApiException(HttpStatus.BAD_REQUEST, "Unsupported JWT token");
         } catch (IllegalArgumentException ex) {
-            throw new WineApiException(HttpStatus.BAD_REQUEST, "JWT claims string is empty");
+            throw new WineApiException(HttpStatus.BAD_REQUEST, "Expired or invalid JWT token");
         }
     }
 }

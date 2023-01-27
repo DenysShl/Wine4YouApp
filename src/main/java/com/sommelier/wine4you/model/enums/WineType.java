@@ -3,7 +3,7 @@ package com.sommelier.wine4you.model.enums;
 public enum WineType {
     WHITE("White"),
     RED("Red"),
-    CHAMPAGNE_SPARKLING("Champagne sparkling"),
+    CHAMPAGNE_SPARKLING("Champagne & Sparkling"),
     ROSE("Rose");
 
     private String type;

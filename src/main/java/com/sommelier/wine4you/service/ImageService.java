@@ -1,6 +1,7 @@
 package com.sommelier.wine4you.service;
 
 import com.sommelier.wine4you.model.Image;
+import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface ImageService {
@@ -8,5 +9,9 @@ public interface ImageService {
 
     byte[] getById(Long wineId, Long imageId);
 
-    void deleteById(Long wineId, Long imageId);
+    Image getById(Long id);
+
+    boolean deleteById(Long wineId, Long imageId);
+
+    List<Image> getAllByWineId(Long wineId);
 }

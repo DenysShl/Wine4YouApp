@@ -1,6 +1,7 @@
 package com.sommelier.wine4you.repository;
 
 import com.sommelier.wine4you.model.Event;
+import com.sommelier.wine4you.model.Meal;
 import com.sommelier.wine4you.model.Wine;
 import com.sommelier.wine4you.model.WineStyle;
 import com.sommelier.wine4you.model.WineTaste;
@@ -28,4 +29,6 @@ public interface WineRepository extends JpaRepository<Wine, Long> {
     Optional<List<Wine>> findByWineType(WineType wineType);
 
     Optional<List<Wine>> findByWineTaste(WineTaste wineTaste);
+
+    Optional<List<Wine>> findByMeal(Meal meal);
 }

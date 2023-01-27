@@ -1,8 +1,8 @@
 package com.sommelier.wine4you.controller;
 
 import com.sommelier.wine4you.config.SecurityConfig;
-import com.sommelier.wine4you.model.dto.UserLoginDto;
-import com.sommelier.wine4you.model.dto.UserSignUpDto;
+import com.sommelier.wine4you.model.dto.user.UserLoginDto;
+import com.sommelier.wine4you.model.dto.user.UserSignUpDto;
 import com.sommelier.wine4you.repository.UserRepository;
 import com.sommelier.wine4you.security.jwt.JwtAuthResponse;
 import com.sommelier.wine4you.service.AuthenticationService;
@@ -45,10 +45,10 @@ public class AuthController {
     @PostMapping("sign-up")
     public ResponseEntity<String> registerUser(@Valid @RequestBody UserSignUpDto signUpDto) {
         if (userRepository.existsByPhone(signUpDto.getPhone())) {
-            return new ResponseEntity<>("Phone is ready taken!", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Phone is already taken!", HttpStatus.BAD_REQUEST);
         }
         if (userRepository.existsByEmail(signUpDto.getEmail())) {
-            return new ResponseEntity<>("Email is ready taken!", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Email is already taken!", HttpStatus.BAD_REQUEST);
         }
 
         authenticationService.registerUser(signUpDto);

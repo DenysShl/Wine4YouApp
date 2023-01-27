@@ -6,7 +6,9 @@ import com.sommelier.wine4you.repository.WineTasteRepository;
 import com.sommelier.wine4you.service.WineTasteService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class WineTasteServiceImpl implements WineTasteService {
     private final WineTasteRepository wineTasteRepository;
 
@@ -21,7 +23,7 @@ public class WineTasteServiceImpl implements WineTasteService {
     }
 
     @Override
-    public WineTaste findById(Long id) {
+    public WineTaste getById(Long id) {
         return wineTasteRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("WineTaste", "id", String.valueOf(id)));
     }
@@ -32,13 +34,25 @@ public class WineTasteServiceImpl implements WineTasteService {
     }
 
     @Override
-    public void deleteById(Long id) {
-        deleteById(id);
+    public boolean deleteById(Long id) {
+        wineTasteRepository.deleteById(id);
+        return wineTasteRepository.existsById(id);
     }
 
     @Override
-    public WineTaste findByTasteName(String name) {
+    public WineTaste findByName(String name) {
         return wineTasteRepository.findByNameTaste(name).orElseThrow(() ->
                 new ResourceNotFoundException("WineTaste", "Taste", name));
+    }
+
+    @Override
+    public boolean existsById(Long id) {
+        return wineTasteRepository.existsById(id);
+    }
+
+    @Override
+    public WineTaste update(Long id, WineTaste taste) {
+        taste.setId(id);
+        return wineTasteRepository.save(taste);
     }
 }
