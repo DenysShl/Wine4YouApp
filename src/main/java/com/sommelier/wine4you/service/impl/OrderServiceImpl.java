@@ -9,6 +9,7 @@ import com.sommelier.wine4you.repository.OrderRepository;
 import com.sommelier.wine4you.service.CartService;
 import com.sommelier.wine4you.service.OrderService;
 import com.sommelier.wine4you.service.PaymentService;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -86,4 +87,9 @@ public class OrderServiceImpl implements OrderService {
         order.setId(id);
         return orderRepository.save(order);
     }
+
+//    private BigDecimal getTotalPrice(Integer delivery, Integer discount, BigDecimal price) {
+//        float discountPersent = discount/100;
+//        return delivery * discountPersent;
+//    }
 }

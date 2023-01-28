@@ -35,22 +35,18 @@ public class Payment {
     private int cvc;
     @Enumerated(EnumType.STRING)
     private PaymentStatus paymentStatus;
-    @OneToOne
-    private Order order;
 
     public Payment(String cardName,
                    String cardNumber,
                    int expiryYear,
                    int expiryMonth,
                    int cvc,
-                   PaymentStatus paymentStatus,
-                   Order order) {
+                   PaymentStatus paymentStatus) {
         this.cardName = cardName;
         this.cardNumber = cardNumber;
         this.expiryYear = expiryYear;
         this.expiryMonth = expiryMonth;
         this.cvc = cvc;
         this.paymentStatus = paymentStatus;
-        this.order = order;
     }
 }

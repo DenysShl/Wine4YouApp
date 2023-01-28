@@ -25,8 +25,7 @@ public class PaymentMapperImpl implements MapperToModel<Payment, PaymentRequestD
                 paymentRequestDto.getExpiryYear(),
                 paymentRequestDto.getExpiryMonth(),
                 paymentRequestDto.getCvc(),
-                PaymentStatus.valueOf(paymentRequestDto.getPaymentStatus()),
-                orderService.getById(paymentRequestDto.getOrderId())
+                PaymentStatus.valueOf(paymentRequestDto.getPaymentStatus())
         );
     }
 }
