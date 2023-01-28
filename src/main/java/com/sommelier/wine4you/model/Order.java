@@ -1,6 +1,7 @@
 package com.sommelier.wine4you.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.sommelier.wine4you.model.enums.PaymentType;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,6 +19,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Setter
 @Getter
@@ -32,18 +34,25 @@ public class Order {
             joinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "item_id", referencedColumnName = "id"))
     private List<Item> items;
+    @Column(name = "order_tracking_number")
+    private String orderTackingNumber;
     @Column(name = "delivery_price")
     private Double deliveryPrice;
     private Integer discount;
     @Column(name = "total_amount")
     private BigDecimal totalAmount;
+    private PaymentType paymentType;
+    @OneToOne
+    private Payment payment;
+    private String orderStatus;
 
     @MapsId
     @OneToOne
     @JoinColumn(name = "id")
     private User user;
 
-    @Column(name = "created_date")
+    @Column(name = "date_created")
+    @CreationTimestamp
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss.SSS")
     private LocalDateTime createdDate;
 

@@ -1,10 +1,15 @@
 package com.sommelier.wine4you.controller;
 
+import com.sommelier.wine4you.exception.PaymentException;
 import com.sommelier.wine4you.model.User;
+import com.sommelier.wine4you.model.dto.payment.PaymentRequestDto;
 import com.sommelier.wine4you.model.dto.shoppingcart.CartRequestDto;
 import com.sommelier.wine4you.model.dto.shoppingcart.CartResponseDto;
+import com.sommelier.wine4you.model.enums.PaymentStatus;
 import com.sommelier.wine4you.model.mapper.impl.CartMapperImpl;
+import com.sommelier.wine4you.model.mapper.impl.PaymentMapperImpl;
 import com.sommelier.wine4you.service.CartService;
+import com.sommelier.wine4you.service.OrderService;
 import com.sommelier.wine4you.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,27 +31,41 @@ public class CartController {
     private final CartService cartService;
     private final CartMapperImpl cartMapper;
     private final UserService userService;
+    private final OrderService orderService;
+    private final PaymentMapperImpl paymentMapper;
 
     @Autowired
     public CartController(CartService cartService,
                           CartMapperImpl cartMapper,
-                          UserService userService) {
+                          UserService userService,
+                          OrderService orderService,
+                          PaymentMapperImpl paymentMapper) {
         this.cartService = cartService;
         this.cartMapper = cartMapper;
         this.userService = userService;
+        this.orderService = orderService;
+        this.paymentMapper = paymentMapper;
     }
 
     @ApiOperation(value = "Create Cart REST API")
     @PostMapping
     public ResponseEntity<String> create(
-            @Valid @RequestBody CartRequestDto cartRequestDto) {
+            @Valid @RequestBody CartRequestDto cartRequestDto,
+            @Valid @RequestBody PaymentRequestDto paymentRequestDto) {
         cartService.addItemsToCart(cartMapper.toModel(cartRequestDto));
-        return new ResponseEntity<>("Order created at cart, successfully!",
+
+        if (!paymentRequestDto.getPaymentStatus()
+                .equals(PaymentStatus.COMPLETE)) {
+            throw new PaymentException("Payment card do not support");
+        }
+        orderService.completeOrder(cartMapper.toModel(cartRequestDto),
+                paymentMapper.toModel(paymentRequestDto));
+        return new ResponseEntity<>("Order created successfully!",
                 HttpStatus.CREATED);
     }
 
     @ApiOperation(value = "Get 'Cart' by user REST API")
-    @GetMapping("{emailUser}")
+    @GetMapping("/by-usrEmail")
     public ResponseEntity<CartResponseDto> getByUser(@RequestParam("emailUser") String emailUser) {
         User user = userService.getByEmail(emailUser);
         return ResponseEntity.ok(cartMapper.toDto(cartService.getByUser(user)));

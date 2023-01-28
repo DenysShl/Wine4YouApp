@@ -56,6 +56,7 @@ public class SecurityConfig {
                                 .antMatchers("/api/v1/auth/**").permitAll()
                                 .antMatchers(HttpMethod.GET, "/api/v1/**").permitAll()
                                 .antMatchers(HttpMethod.POST, "/api/v1/**").permitAll()
+                                .antMatchers(HttpMethod.GET, "/api/v1/orders").permitAll()
                                 .antMatchers("/v2/api-docs/**").permitAll()
                                 .antMatchers("/swagger-ui/**").permitAll()
                                 .antMatchers("/swagger-resources/**").permitAll()

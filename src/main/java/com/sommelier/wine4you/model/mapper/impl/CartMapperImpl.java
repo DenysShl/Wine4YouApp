@@ -62,7 +62,7 @@ public class CartMapperImpl implements MapperToModel<Cart, CartRequestDto>,
 
         cart.setDontCallMeBack(cartRequestDto.getDontCallMeBack());
         cart.setBuyAsGift(cartRequestDto.getBuyAsGift());
-        cart.setPayment(PaymentType.valueOf(cartRequestDto.getPayment().toUpperCase()));
+        cart.setPaymentType(PaymentType.valueOf(cartRequestDto.getPayment().toUpperCase()));
         ShippingType shippingType
                 = ShippingType.valueOf(cartRequestDto.getShipping().toUpperCase());
         cart.setShipping(shippingType);
@@ -104,7 +104,7 @@ public class CartMapperImpl implements MapperToModel<Cart, CartRequestDto>,
         responseDto.setDontCallMeBack(cart.getDontCallMeBack());
         responseDto.setBuyAsGift(cart.getBuyAsGift());
         responseDto.setShipping(cart.getShipping());
-        responseDto.setPayment(cart.getPayment());
+        responseDto.setPayment(cart.getPaymentType());
         responseDto.setCreatedDate(cart.getCreatedDate());
         return responseDto;
     }

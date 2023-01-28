@@ -3,32 +3,49 @@ package com.sommelier.wine4you.service.impl;
 import com.sommelier.wine4you.exception.ResourceNotFoundException;
 import com.sommelier.wine4you.model.Cart;
 import com.sommelier.wine4you.model.Order;
+import com.sommelier.wine4you.model.Payment;
 import com.sommelier.wine4you.model.User;
 import com.sommelier.wine4you.repository.OrderRepository;
 import com.sommelier.wine4you.service.CartService;
 import com.sommelier.wine4you.service.OrderService;
+import com.sommelier.wine4you.service.PaymentService;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final CartService cartService;
+    private final PaymentService paymentService;
 
     @Autowired
     public OrderServiceImpl(OrderRepository orderRepository,
-                            CartService cartService) {
+                            CartService cartService,
+                            PaymentService paymentService) {
         this.orderRepository = orderRepository;
         this.cartService = cartService;
+        this.paymentService = paymentService;
     }
 
     @Override
-    public Order completeOrder(Cart cart) {
+    @Transactional
+    public Order completeOrder(Cart cart, Payment payment) {
         Order order = new Order();
-        order.setCreatedDate(LocalDateTime.now());
+        order.setItems(cart.getItems());
         order.setUser(cart.getUser());
+        order.setOrderTackingNumber(UUID.randomUUID().toString());
+        order.setDeliveryPrice(cart.getDeliveryPrice());
+        order.setDiscount(cart.getDiscount());
+        order.setTotalAmount(cart.getTotalAmount());
+        order.setPaymentType(cart.getPaymentType());
+        order.setOrderStatus("Order inprogress");
+        order.setCreatedDate(LocalDateTime.now());
+        order.setPayment(payment);
+        paymentService.create(payment);
         orderRepository.save(order);
         cartService.clear(cart);
         return order;

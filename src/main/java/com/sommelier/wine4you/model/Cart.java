@@ -48,7 +48,7 @@ public class Cart {
     @Enumerated(value = EnumType.STRING)
     private ShippingType shipping;
     @Enumerated(value = EnumType.STRING)
-    private PaymentType payment;
+    private PaymentType paymentType;
 
     @Column(name = "created_date")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss.SSS")
@@ -95,7 +95,7 @@ public class Cart {
         if (shipping != cart.shipping) {
             return false;
         }
-        if (payment != cart.payment) {
+        if (paymentType != cart.paymentType) {
             return false;
         }
         return Objects.equals(createdDate, cart.createdDate);
@@ -113,7 +113,7 @@ public class Cart {
         result = 31 * result + (dontCallMeBack != null ? dontCallMeBack.hashCode() : 0);
         result = 31 * result + (buyAsGift != null ? buyAsGift.hashCode() : 0);
         result = 31 * result + (shipping != null ? shipping.hashCode() : 0);
-        result = 31 * result + (payment != null ? payment.hashCode() : 0);
+        result = 31 * result + (paymentType != null ? paymentType.hashCode() : 0);
         result = 31 * result + (createdDate != null ? createdDate.hashCode() : 0);
         return result;
     }
