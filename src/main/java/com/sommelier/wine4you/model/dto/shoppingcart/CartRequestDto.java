@@ -3,6 +3,7 @@ package com.sommelier.wine4you.model.dto.shoppingcart;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sommelier.wine4you.model.dto.address.AddressRequestDto;
 import com.sommelier.wine4you.model.dto.item.ItemRequestDto;
+import com.sommelier.wine4you.model.dto.payment.PaymentRequestDto;
 import java.math.BigDecimal;
 import java.util.List;
 import lombok.Data;
@@ -22,4 +23,5 @@ public class CartRequestDto {
     private String payment;
     private String postalOffice;
     private String wine4youShop;
+    private PaymentRequestDto paymentRequestDto;
 }

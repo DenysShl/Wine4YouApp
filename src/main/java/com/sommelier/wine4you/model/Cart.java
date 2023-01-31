@@ -18,6 +18,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -53,6 +54,11 @@ public class Cart {
     @Column(name = "created_date")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss.SSS")
     private LocalDateTime createdDate;
+
+    @PrePersist
+    private void init() {
+        createdDate = LocalDateTime.now();
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -28,7 +28,7 @@ class WineServiceImplTest {
     private static final Long testId = 9L;
     private static final Long fakeId = 300L;
     private Wine testWine;
-    private Wine wine;
+    private  Wine wine;
     private WineType testWineType;
     private WineType testAnotherWineType;
     private WineStyle testStyle;
@@ -80,7 +80,7 @@ class WineServiceImplTest {
         mealRepository = Mockito.spy(MealRepository.class);
         imageDbRepository = Mockito.spy(ImageDbRepository.class);
         wineMapper = Mockito.mock(WineMapperImpl.class);
-        wineService = new WineServiceImpl(wineRepository, eventRepository, wineStyleRepository,
+        wineService = new WineServiceImpl(wineRepository, eventRepository,wineStyleRepository,
                 wineTasteRepository, mealRepository, imageDbRepository, wineMapper);
         testWine.setId(testId);
         testWine.setWineType(testWineType);

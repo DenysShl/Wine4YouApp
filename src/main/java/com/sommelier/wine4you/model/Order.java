@@ -1,8 +1,6 @@
 package com.sommelier.wine4you.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.sommelier.wine4you.model.enums.PaymentType;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -12,10 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.MapsId;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,32 +27,32 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @OneToMany
-    @JoinTable(name = "orders_items",
-            joinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "item_id", referencedColumnName = "id"))
     private List<Item> items;
+
+    @OneToOne
+    private Cart cart;
     @Column(name = "order_tracking_number")
     private String orderTackingNumber;
-    @Column(name = "delivery_price")
-    private Double deliveryPrice;
-    private Integer discount;
-    @Column(name = "total_amount")
-    private BigDecimal totalAmount;
-    private PaymentType paymentType;
+
     @OneToOne
     private Payment payment;
     private String orderStatus;
 
-    @MapsId
-    @OneToOne
-    @JoinColumn(name = "id")
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Column(name = "date_created")
     @CreationTimestamp
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss.SSS")
     private LocalDateTime createdDate;
+
+    @PrePersist
+    private void init() {
+        createdDate = LocalDateTime.now();
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -70,16 +68,19 @@ public class Order {
         if (!Objects.equals(id, order.id)) {
             return false;
         }
-        if (!Objects.equals(items, order.items)) {
+        if (!Objects.equals(cart, order.cart)) {
             return false;
         }
-        if (!Objects.equals(deliveryPrice, order.deliveryPrice)) {
+        if (!Objects.equals(orderTackingNumber, order.orderTackingNumber)) {
             return false;
         }
-        if (!Objects.equals(discount, order.discount)) {
+        if (!Objects.equals(payment, order.payment)) {
             return false;
         }
-        if (!Objects.equals(totalAmount, order.totalAmount)) {
+        if (!Objects.equals(orderStatus, order.orderStatus)) {
+            return false;
+        }
+        if (!Objects.equals(user, order.user)) {
             return false;
         }
         return Objects.equals(createdDate, order.createdDate);
@@ -88,23 +89,12 @@ public class Order {
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (items != null ? items.hashCode() : 0);
-        result = 31 * result + (deliveryPrice != null ? deliveryPrice.hashCode() : 0);
-        result = 31 * result + (discount != null ? discount.hashCode() : 0);
-        result = 31 * result + (totalAmount != null ? totalAmount.hashCode() : 0);
+        result = 31 * result + (cart != null ? cart.hashCode() : 0);
+        result = 31 * result + (orderTackingNumber != null ? orderTackingNumber.hashCode() : 0);
+        result = 31 * result + (payment != null ? payment.hashCode() : 0);
+        result = 31 * result + (orderStatus != null ? orderStatus.hashCode() : 0);
+        result = 31 * result + (user != null ? user.hashCode() : 0);
         result = 31 * result + (createdDate != null ? createdDate.hashCode() : 0);
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Order{"
-                + "id=" + id
-                + ", items=" + items
-                + ", deliveryPrice=" + deliveryPrice
-                + ", discount=" + discount
-                + ", totalAmount=" + totalAmount
-                + ", createdDate=" + createdDate
-                + '}';
     }
 }

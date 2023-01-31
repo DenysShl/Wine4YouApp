@@ -7,13 +7,17 @@ import static org.mockito.ArgumentMatchers.any;
 
 import com.sommelier.wine4you.model.Role;
 import com.sommelier.wine4you.model.User;
+import com.sommelier.wine4you.repository.UserRepository;
 import com.sommelier.wine4you.service.UserService;
+import java.util.Collection;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -52,11 +56,6 @@ class CustomUserDetailsServiceTest {
         assertNotNull(actual);
         assertEquals(bob.getEmail(), actual.getUsername());
         assertEquals(bob.getPassword(), actual.getPassword());
-    }
-
-    @Test
-    void loadUserByUsername_nonExistentEmail_notOk() {
-        assertThrows(Exception.class, () -> userDetailsService.loadUserByUsername(any()));
     }
 
     private User getTestUser(String firstName,

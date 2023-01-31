@@ -2,7 +2,6 @@ package com.sommelier.wine4you.service.impl;
 
 import com.sommelier.wine4you.exception.ResourceNotFoundException;
 import com.sommelier.wine4you.model.Item;
-import com.sommelier.wine4you.model.Order;
 import com.sommelier.wine4you.repository.ItemRepository;
 import com.sommelier.wine4you.repository.OrderRepository;
 import com.sommelier.wine4you.service.ItemService;
@@ -20,14 +19,6 @@ public class ItemServiceImpl implements ItemService {
                            OrderRepository orderRepository) {
         this.itemRepository = itemRepository;
         this.orderRepository = orderRepository;
-    }
-
-    @Override
-    public List<Item> getAllByOrderId(Long id) {
-        Order order = orderRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Order", "Id", String.valueOf(id))
-        );
-        return itemRepository.findByOrder(order);
     }
 
     @Override

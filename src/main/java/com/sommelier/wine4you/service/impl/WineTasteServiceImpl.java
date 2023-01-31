@@ -46,11 +46,6 @@ public class WineTasteServiceImpl implements WineTasteService {
     }
 
     @Override
-    public boolean existsById(Long id) {
-        return wineTasteRepository.existsById(id);
-    }
-
-    @Override
     public WineTaste update(Long id, WineTaste taste) {
         taste.setId(id);
         return wineTasteRepository.save(taste);

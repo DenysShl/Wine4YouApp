@@ -21,7 +21,8 @@ class EmailValidatorTest {
 
     @Test
     void isValid_Email_Ok() {
-        assertTrue(emailValidator.isValid(emailValid, null));
+        boolean valid = emailValidator.isValid(emailValid, null);
+        assertTrue(valid);
     }
 
     @Test

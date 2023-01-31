@@ -1,6 +1,5 @@
 package com.sommelier.wine4you.model.dto.payment;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -8,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 @Getter
 @Setter
 @NoArgsConstructor
@@ -17,7 +15,7 @@ public class PaymentRequestDto {
     @NotEmpty
     private String cardName;
     @NotEmpty
-    @Size(min = 16, max = 17)
+    @Size(min = 16, max = 16)
     private String cardNumber;
     @NotEmpty
     private int expiryYear;

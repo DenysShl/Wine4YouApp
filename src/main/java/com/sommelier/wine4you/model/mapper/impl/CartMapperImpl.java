@@ -9,10 +9,8 @@ import com.sommelier.wine4you.model.enums.ShippingType;
 import com.sommelier.wine4you.model.mapper.MapperToDto;
 import com.sommelier.wine4you.model.mapper.MapperToModel;
 import com.sommelier.wine4you.service.AddressService;
-import com.sommelier.wine4you.service.CartService;
 import com.sommelier.wine4you.service.ItemService;
 import com.sommelier.wine4you.service.UserService;
-import com.sommelier.wine4you.service.WineService;
 import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,27 +21,21 @@ public class CartMapperImpl implements MapperToModel<Cart, CartRequestDto>,
         MapperToDto<CartResponseDto, Cart> {
     private static final String DELIMITER = ",";
     private final ItemService itemService;
-    private final CartService cartService;
     private final UserService userService;
     private final AddressService addressService;
     private final AddressMapperImpl addressMapper;
-    private final WineService wineService;
     private final ItemMapperImpl itemMapper;
 
     @Autowired
     public CartMapperImpl(ItemService itemService,
-                          CartService cartService,
                           UserService userService,
                           AddressService addressService,
                           AddressMapperImpl addressMapper,
-                          WineService wineService,
                           ItemMapperImpl itemMapper) {
         this.itemService = itemService;
-        this.cartService = cartService;
         this.userService = userService;
         this.addressService = addressService;
         this.addressMapper = addressMapper;
-        this.wineService = wineService;
         this.itemMapper = itemMapper;
     }
 
@@ -82,7 +74,6 @@ public class CartMapperImpl implements MapperToModel<Cart, CartRequestDto>,
                         addressMapper.toModel(cartRequestDto.getAddressRequestDto())));
         }
         cart.setUser(userService.getByEmail(cartRequestDto.getEmail()));
-        cart.setCreatedDate(LocalDateTime.now());
         return cart;
     }
 

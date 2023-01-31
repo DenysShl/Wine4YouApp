@@ -3,7 +3,6 @@ package com.sommelier.wine4you.controller;
 import com.sommelier.wine4you.exception.PaymentException;
 import com.sommelier.wine4you.model.Cart;
 import com.sommelier.wine4you.model.User;
-import com.sommelier.wine4you.model.dto.payment.PaymentRequestDto;
 import com.sommelier.wine4you.model.dto.shoppingcart.CartRequestDto;
 import com.sommelier.wine4you.model.dto.shoppingcart.CartResponseDto;
 import com.sommelier.wine4you.model.enums.PaymentStatus;
@@ -51,22 +50,22 @@ public class CartController {
     @ApiOperation(value = "Create Cart REST API")
     @PostMapping
     public ResponseEntity<String> create(
-            @Valid @RequestBody CartRequestDto cartRequestDto,
-            @RequestBody PaymentRequestDto paymentRequestDto) {
+            @Valid @RequestBody CartRequestDto cartRequestDto) {
         Cart cart = cartMapper.toModel(cartRequestDto);
         cartService.addItemsToCart(cart);
 
-//        if (!paymentRequestDto.getPaymentStatus()
-//                .equals(PaymentStatus.COMPLETE)) {
-//            throw new PaymentException("Payment card do not support");
-//        }
-//        orderService.completeOrder(cart, paymentMapper.toModel(paymentRequestDto));
+        if (!PaymentStatus.valueOf(cartRequestDto.getPaymentRequestDto().getPaymentStatus())
+                .equals(PaymentStatus.COMPLETE)) {
+            throw new PaymentException("Payment card do not support");
+        }
+        orderService.completeOrder(cart,
+                paymentMapper.toModel(cartRequestDto.getPaymentRequestDto()));
         return new ResponseEntity<>("Order created successfully!",
                 HttpStatus.CREATED);
     }
 
     @ApiOperation(value = "Get 'Cart' by user REST API")
-    @GetMapping("/by-usrEmail")
+    @GetMapping("/by-userEmail")
     public ResponseEntity<CartResponseDto> getByUser(@RequestParam("emailUser") String emailUser) {
         User user = userService.getByEmail(emailUser);
         return ResponseEntity.ok(cartMapper.toDto(cartService.getByUser(user)));

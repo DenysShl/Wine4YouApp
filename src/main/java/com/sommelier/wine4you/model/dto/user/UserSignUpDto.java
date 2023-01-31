@@ -7,9 +7,13 @@ import com.sommelier.wine4you.utils.Phone;
 import java.time.LocalDate;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import lombok.Data;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@RequiredArgsConstructor
 public class UserSignUpDto {
     @NotBlank(message = "First name is mandatory")
     @Size(min = 3, message = "First name should have at least 3 characters")
@@ -37,4 +41,17 @@ public class UserSignUpDto {
     @Phone(message = "The phone must match the mask +XX-XXX-XXX-XXXX")
     private String phone;
     private AddressRequestDto address;
+
+    @Override
+    public String toString() {
+        return "UserSignUpDto{"
+                + "firstName='" + firstName + '\''
+                + ", lastName='" + lastName + '\''
+                + ", email='" + email + '\''
+                + ", password='" + "OK" + '\''
+                + ", birthday=" + birthday
+                + ", phone='" + phone + '\''
+                + ", address=" + address
+                + '}';
+    }
 }

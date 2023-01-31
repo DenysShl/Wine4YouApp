@@ -16,4 +16,4 @@ A virtual sommelier will help you choose an exquisite and extraordinary wine for
 
 
 ## Structure DataBase
-![](images/structure db.png)
+![](images/structure_db.png)
