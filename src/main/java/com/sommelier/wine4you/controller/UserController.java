@@ -42,6 +42,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "Get All Users REST API")
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping()
     public ResponseEntity<List<UserResponseDto>> getAllUsers() {
         return ResponseEntity.ok(userService.getAll()
@@ -51,6 +52,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "Get User by 'Id' REST API")
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<UserResponseDto> getUserById(@PathVariable Long id) {
         return ResponseEntity.ok(userMapper.toDto(userService.getById(id)));
