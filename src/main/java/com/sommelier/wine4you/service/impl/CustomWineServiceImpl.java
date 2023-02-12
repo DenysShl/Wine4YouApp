@@ -29,7 +29,8 @@ public class CustomWineServiceImpl implements CustomWineService {
     public CustomWineServiceImpl(EventService eventService,
                                  MealService mealService,
                                  WineTasteService wineTasteService,
-                                 WineStyleService wineStyleService, EntityManager entityManager) {
+                                 WineStyleService wineStyleService,
+                                 EntityManager entityManager) {
         this.eventService = eventService;
         this.mealService = mealService;
         this.wineTasteService = wineTasteService;
