@@ -6,7 +6,7 @@ public enum WineType {
     CHAMPAGNE_SPARKLING("Champagne & Sparkling"),
     ROSE("Rose");
 
-    private String type;
+    private final String type;
 
     WineType(String value) {
         this.type = value;

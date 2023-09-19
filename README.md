@@ -7,6 +7,7 @@ A virtual sommelier will help you choose an exquisite and extraordinary wine for
 
 ## Swagger documentation
  * Start page swagger for wine4you
+ * http://localhost:8000/swagger-ui/
 
 ![](images/swagger_1.png)
 
